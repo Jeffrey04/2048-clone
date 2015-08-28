@@ -6,6 +6,7 @@ body {
     padding: 0;
     margin: 0;
     color: #111;
+    background-color: #EFEFEF;
 }
 
 h1 {
@@ -21,15 +22,15 @@ h1 {
 
     #game .base {
         margin: 0 auto;
-        background-color: #EEE;
-    }
-
-    #game .grid {
         background-color: #DDD;
     }
 
-    #game .tile {
+    #game .grid {
         background-color: #CCC;
+    }
+
+    #game .tile {
+        background-color: #BBB;
     }
 
     #game .play {
@@ -120,3 +121,9 @@ h1 {
         #game .play .tile-2048 span {
             font-size: 40%;
         }
+
+p {
+    position: relative;
+    top: -300px;
+    text-align: center;
+}
