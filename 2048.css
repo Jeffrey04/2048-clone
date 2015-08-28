@@ -1,0 +1,122 @@
+body {
+    font-size: 14pt;
+    font-family: Helvetica, Verdana, "Bitstream Vera Sans", "Hiragino Sans GB", "LiHei Pro", STHeiti, "Microsoft YaHei", SimHei, "WenQuanYi Micro Hei", Sans-serif;
+    float: left;
+    width: 100%;
+    padding: 0;
+    margin: 0;
+    color: #111;
+}
+
+h1 {
+    text-align: center;
+}
+
+#game {
+}
+
+    #game h2 {
+        text-align: center;
+    }
+
+    #game .base {
+        margin: 0 auto;
+        background-color: #EEE;
+    }
+
+    #game .grid {
+        background-color: #DDD;
+    }
+
+    #game .tile {
+        background-color: #CCC;
+    }
+
+    #game .play {
+        margin: 0 auto;
+    }
+
+    #game .play .tile-2 {
+        background-color: #EEE4DA;
+    }
+
+    #game .play .tile-4 {
+        background-color: #EDE0C8;
+    }
+
+    #game .play .tile-8 {
+        color: #F9F6F2;
+        background-color: #F2B179;
+    }
+
+    #game .play .tile-16 {
+        color: #F9F6F2;
+        background-color: #F59563;
+    }
+
+        #game .tile-16 span {
+            font-size: 80%;
+        }
+
+    #game .play .tile-32 {
+        color: #F9F6F2;
+        background-color: #F67C5F;
+    }
+
+        #game .tile-32 span {
+            font-size: 80%;
+        }
+
+    #game .play .tile-64 {
+        color: #F9F6F2;
+        background-color: #F65E3B;
+    }
+
+        #game .tile-64 span {
+            font-size: 80%;
+        }
+
+    #game .play .tile-128 {
+        color: #F9F6F2;
+        background-color: #EDCF72;
+    }
+
+        #game .play .tile-128 span {
+            font-size: 60%;
+        }
+
+    #game .play .tile-256 {
+        color: #F9F6F2;
+        background-color: #EDCC61;
+    }
+
+        #game .play .tile-256 span {
+            font-size: 60%;
+        }
+
+    #game .play .tile-512 {
+        color: #F9F6F2;
+        background-color: #EDC850;
+    }
+
+        #game .play .tile-512 span {
+            font-size: 60%;
+        }
+
+    #game .play .tile-1024 {
+        color: #F9F6F2;
+        background-color: #EDC53F;
+    }
+
+        #game .play .tile-1024 span {
+            font-size: 40%;
+        }
+
+    #game .play .tile-2048 {
+        color: #F9F6F2;
+        background-color: #EDC22E;
+    }
+
+        #game .play .tile-2048 span {
+            font-size: 40%;
+        }
