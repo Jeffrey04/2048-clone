@@ -25,6 +25,19 @@ h1 {
         background-color: #DDD;
     }
 
+    #game .highscore {
+        margin: 0.5em auto;
+        background-color: #DDD;
+    }
+
+        #game .highscore p {
+            padding: 0.5em;
+        }
+
+        #game .highscore span {
+            font-weight: bold;
+        }
+
     #game .grid {
         background-color: #CCC;
     }
@@ -122,7 +135,7 @@ h1 {
             font-size: 40%;
         }
 
-p {
+#footer {
     position: relative;
     top: -300px;
     text-align: center;
