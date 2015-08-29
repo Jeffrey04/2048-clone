@@ -9,11 +9,44 @@ body {
     background-color: #EFEFEF;
 }
 
-h1 {
-    text-align: center;
+#container {
+    float: left;
+    width: 100%;
+}
+
+#header {
+    float: left;
+    width: 100%;
+    background-color: #333;
+    margin: 0;
+    padding: 0;
+}
+
+    #header h1 {
+        margin: 1em auto 0;
+        width: 450px;
+        color: #EEE;
+    }
+
+    #header p {
+        margin: 0 auto 2em;
+        width: 450px;
+        color: #CCC
+    }
+
+#body {
+    float: left;
+    width: 100%;
+}
+
+#instruction {
+    width: 450px;
+    margin: 2em auto;
 }
 
 #game {
+    width: 450px;
+    margin: 0 auto;
 }
 
     #game h2 {
@@ -25,17 +58,42 @@ h1 {
         background-color: #DDD;
     }
 
+    #game .footer {
+        margin: 0 auto;
+    }
+
+    #game .reset {
+        margin: 0;
+    }
+
+        #game .reset a {
+            display: block;
+            margin-left: 5px;
+            margin-top: 0.5em;
+            background-color: #DDD;
+            padding: 10px;
+            font-weight: bold;
+            text-align: center;
+            text-decoration: none;
+            color: #666;
+        }
+
     #game .highscore {
-        margin: 0.5em auto;
-        background-color: #DDD;
+        margin: 0;
     }
 
         #game .highscore p {
+            background-color: #DDD;
             padding: 0.5em;
+            margin-right: 5px;
+            margin: 0.5em 0;
         }
 
         #game .highscore span {
             font-weight: bold;
+            display: block;
+            text-align: center;
+            font-size: 150%;
         }
 
     #game .grid {
@@ -136,7 +194,32 @@ h1 {
         }
 
 #footer {
+    float: left;
     position: relative;
-    top: -300px;
-    text-align: center;
+    top: 500px;
+    width: 100%;
+    background-color: #666;
 }
+
+    #footer h2, #footer p {
+        width: 450px;
+    }
+
+    #footer h2 {
+        text-align: center;
+        margin: 1em auto;
+        color: #BBB;
+    }
+
+    #footer p {
+        margin: 1em auto 2em;
+        color: #CCC
+    }
+
+    #footer a:link, #footer a:active {
+        color: #00CCFF;
+    }
+
+    #footer a:visited {
+        color: #00AAFF;
+    }
