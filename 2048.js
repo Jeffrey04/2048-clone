@@ -60,7 +60,8 @@ function grid_get_coordinates(settings) {
 function grid_setup(settings, coordinates_list) {
     return $(document.createElement('div'))
         .addClass('base')
-        .css('position', 'relative')
+        .css('clear', 'both')
+        .css('position', 'absolute')
         .css('z-index', -200)
         .css('width', settings.size * settings.column + (settings.column + 1) * settings.margin + 'px')
         .css('height', settings.size * settings.row + (settings.row + 1) * settings.margin + 'px')
@@ -97,11 +98,10 @@ function game_init(board, settings, tile_builder) {
     return $(document.createElement('div'))
         .appendTo(board)
         .addClass('play')
-        .css('position', 'relative')
+        .css('position', 'absolute')
         .css('z-index', 0)
         .css('width', _.first(board_get_size(settings)) + 'px')
         .css('height', _.last(board_get_size(settings)) + 'px')
-        .css('top', -(settings.size * settings.row + (settings.row + 1) * settings.margin) + 'px')
         .append(tile_builder())
         .append(tile_builder())
 }
@@ -272,14 +272,55 @@ function evaluate_next_phase(vector, settings, tile_group) {
     }
 }
 
-function highscore_builder(settings) {
+function footer_builder(settings, highscore_builder, reset_builder) {
     return $(document.createElement('div'))
+        .addClass('header')
+        .css('position', 'relative')
         .css('width', _.first(board_get_size(settings)) + 'px')
-        .addClass('highscore')
-        .append(
-            $(document.createElement('p'))
-                .append(document.createTextNode('Highest-valued: '))
-                .append(document.createElement('span')))
+        .css('top', _.last(board_get_size(settings)) + 'px')
+        .append(highscore_builder())
+        .append(reset_builder())
+}
+
+function reset_get_builder(settings, reset_behaviour) {
+    return function() {
+        return $(document.createElement('div'))
+            .addClass('reset')
+            .css('float', 'right')
+            .css('width', '33.3%')
+            .append(
+                $(document.createElement('a'))
+                    .text('Reset')
+                    .attr('href', '#')
+                    .click(reset_behaviour))
+    }
+}
+
+function reset_get_behaviour(settings, tile_builder) {
+    return function(event) {
+        $('.tile').remove()
+
+        $('.play')
+            .append(tile_builder())
+            .append(tile_builder())
+
+        highscore_update($('.tile'))
+
+        return false
+    }
+}
+
+function highscore_get_builder(settings) {
+    return function() {
+        return $(document.createElement('div'))
+            .css('float', 'left')
+            .css('width', '66.7%')
+            .addClass('highscore')
+            .append(
+                $(document.createElement('p'))
+                    .append(document.createTextNode('Highest-valued tile: '))
+                    .append(document.createElement('span')))
+    }
 }
 
 function highscore_update(tile_list) {
@@ -352,7 +393,10 @@ $.fn.game_2048 = function(options) {
         settings,
         tile_get_builder(settings))
 
-    $(this).prepend(highscore_builder(settings))
+    $(this).append(footer_builder(
+                        settings,
+                        highscore_get_builder(settings),
+                        reset_get_builder(settings, reset_get_behaviour(settings, tile_get_builder(settings)))))
 
     highscore_update($('.tile'))
 
