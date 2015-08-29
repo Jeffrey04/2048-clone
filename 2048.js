@@ -109,8 +109,8 @@ function tile_get_builder(settings) {
         return $(document.createElement('div'))
             .append(
                 $(document.createElement('span'))
-                    .css('top', '10px')
-                    .css('padding', 0)
+                    .css('display', 'block')
+                    .css('padding', '10px')
                     .css('margin', 0)
                     .text(value))
             .addClass('tile tile-' + value)
