@@ -203,27 +203,29 @@ function tile_get_value(tile) {
     return parseInt(tile.data('value'))
 }
 
-function tile_reduce_move(settings, vector, current, tile) {
-    var result, index_new;
+function tile_mover_reducer(settings, vector) {
+    return function(current, incoming) {
+        var result, index_new;
 
-    if(current.length == 0) {
-        index_new = vector_get_edge(settings, tile_get_index(tile),vector)
-    } else {
-        index_new = [_.first(_.first(_.last(current))) - vector[0],
-                        _.last(_.first(_.last(current))) - vector[1]]
+        if(current.length == 0) {
+            index_new = vector_get_edge(settings, tile_get_index(_.last(incoming)),vector)
+        } else {
+            index_new = [_.first(_.first(_.last(current))) - vector[0],
+                            _.last(_.first(_.last(current))) - vector[1]]
+        }
+
+        result = current.concat([[index_new, _.last(incoming)]])
+
+        _.last(incoming).data('column_index', index_new[0])
+            .data('row_index', index_new[1])
+            .animate({
+                'left': _.first(index_to_coordinates(index_new, settings)),
+                'top': _.last(index_to_coordinates(index_new, settings))
+            },
+            { duration: 100 })
+
+        return result
     }
-
-    result = current.concat([[index_new, tile]])
-
-    tile.data('column_index', index_new[0])
-        .data('row_index', index_new[1])
-        .animate({
-            'left': _.first(index_to_coordinates(index_new, settings)),
-            'top': _.last(index_to_coordinates(index_new, settings))
-        },
-        { duration: 100 })
-
-    return result
 }
 
 function game_get_state(tile_list) {
@@ -250,9 +252,7 @@ function evaluate_next_phase(vector, settings, tile_group) {
                 return _.map(
                     _.reduce(
                         _.reduce(tiles, tile_reduce_merge, []),
-                        function(current, incoming) {
-                            return tile_reduce_move(settings, vector, current, _.last(incoming))
-                        },
+                        tile_mover_reducer(settings, vector),
                         [])
                 , _.last)
             })
