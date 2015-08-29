@@ -87,14 +87,20 @@ function index_get_random(settings) {
         : index;
 }
 
+function board_get_size(settings) {
+    return [
+        settings.size * settings.column + (settings.column + 1) * settings.margin,
+        settings.size * settings.row + (settings.row + 1) * settings.margin]
+}
+
 function game_init(board, settings, tile_builder) {
     return $(document.createElement('div'))
         .appendTo(board)
         .addClass('play')
         .css('position', 'relative')
         .css('z-index', 0)
-        .css('width', settings.size * settings.column + (settings.column + 1) * settings.margin + 'px')
-        .css('height', settings.size * settings.row + (settings.row + 1) * settings.margin + 'px')
+        .css('width', _.first(board_get_size(settings)) + 'px')
+        .css('height', _.last(board_get_size(settings)) + 'px')
         .css('top', -(settings.size * settings.row + (settings.row + 1) * settings.margin) + 'px')
         .append(tile_builder())
         .append(tile_builder())
@@ -266,10 +272,20 @@ function evaluate_next_phase(vector, settings, tile_group) {
     }
 }
 
+function highscore_builder(settings) {
+    return $(document.createElement('div'))
+        .css('width', _.first(board_get_size(settings)) + 'px')
+        .addClass('highscore')
+        .append(
+            $(document.createElement('p'))
+                .append(document.createTextNode('Highest-valued: '))
+                .append(document.createElement('span')))
+}
+
 function highscore_update(tile_list) {
     $('.play').parent()
-        .find('h2')
-        .text('Highest valued tile: ' + _.max(_.map(_.map(tile_list, $), tile_get_value)))
+        .find('.highscore span')
+        .text(_.max(_.map(_.map(tile_list, $), tile_get_value)))
 }
 
 function game_get_behavior(settings) {
@@ -336,7 +352,7 @@ $.fn.game_2048 = function(options) {
         settings,
         tile_get_builder(settings))
 
-    $(this).prepend(document.createElement('h2'))
+    $(this).prepend(highscore_builder(settings))
 
     highscore_update($('.tile'))
 
